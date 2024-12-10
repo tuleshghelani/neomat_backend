@@ -21,6 +21,9 @@ const validateEnquiry = [
 
 // Public route - Create enquiry
 router.post('/', validateEnquiry, createEnquiry);
+// router.post('/hello', (req, res) => {
+//   res.send('Hello World');
+// });
 
 // Protected routes
 router.use(authMiddleware);

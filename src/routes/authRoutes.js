@@ -17,5 +17,8 @@ const validateLogin = [
 
 router.post('/register', validateRegistration, register);
 router.post('/login', validateLogin, login);
+router.get('/hello', (req, res) => {
+  res.send('Hello World');
+});
 
 module.exports = router;
