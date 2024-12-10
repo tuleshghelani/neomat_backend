@@ -14,6 +14,9 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/enquiries', enquiryRoutes);
+app.get('/test', (req, res) => {
+  res.send('This is a test route');
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
