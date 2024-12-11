@@ -27,7 +27,7 @@ router.post('/', validateEnquiry, createEnquiry);
 
 // Protected routes
 router.use(authMiddleware);
-router.get('/', getAllEnquiries);
+router.post('/getAllEnquiries/', getAllEnquiries);
 router.get('/:id', getEnquiryById);
 router.put('/:id', validateEnquiry, updateEnquiry);
 router.delete('/:id', deleteEnquiry);
