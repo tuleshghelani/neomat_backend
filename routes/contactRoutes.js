@@ -1,6 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
+const authMiddleware = require('../middleware/auth');
 const {
   createContact,
   getAllContacts,
@@ -16,8 +17,11 @@ const validateContact = [
   body('message').optional().trim().escape()
 ];
 
-// Routes
+// Public route
 router.post('/', validateContact, createContact);
+
+// Protected routes
+router.use(authMiddleware);
 router.post('/getAllContacts/', getAllContacts);
 router.put('/updateStatus/', updateContactStatus);
 
