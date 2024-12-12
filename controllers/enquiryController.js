@@ -11,8 +11,9 @@ const createEnquiry = async (req, res) => {
     const { name, company_name, email, mobilenumber, address } = req.body;
     
     const result = await pool.query(
-      'INSERT INTO enquiry_master (name, company_name, email, mobilenumber, address, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [name, company_name, email, mobilenumber, address, 'P']
+      'INSERT INTO enquiry_master (name, company_name, email, mobilenumber, address, status, country, designation, productname) ' +
+      ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+      [name, company_name, email, mobilenumber, address, 'P', country, designation, productname]
     );
 
     res.status(201).json({message : "Enquiry sent successfully"});

@@ -8,20 +8,24 @@ CREATE TABLE users (
 );
 
 -- Enquiry master table
-CREATE TABLE enquiry_master (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR,
-    company_name VARCHAR,
-    email VARCHAR,
-    mobilenumber VARCHAR,
-    address VARCHAR,
-    status varchar(1) DEFAULT 'P'::character varying NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE public.enquiry_master (
+	id bigserial NOT NULL,
+	"name" varchar NULL,
+	company_name varchar NULL,
+	email varchar NULL,
+	mobilenumber varchar NULL,
+	address varchar NULL,
+	created_at timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	status varchar(1) DEFAULT 'P'::character varying NULL,
+	country varchar NULL,
+	designation varchar NULL,
+	productname varchar NULL,
+	CONSTRAINT enquiry_master_pkey PRIMARY KEY (id)
 );
 
 -- DROP TABLE public.contact;
 CREATE TABLE public.contact (
-	id BIGSERIAL NOT NULL,
+	id bigserial NOT NULL,
 	full_name varchar NOT NULL,
 	email varchar NOT NULL,
 	subject varchar NOT NULL,
@@ -29,5 +33,8 @@ CREATE TABLE public.contact (
 	message varchar NULL,
 	status varchar DEFAULT 'P'::character varying NULL,
 	created_at varchar DEFAULT now() NULL,
+	company_name varchar NULL,
+	designation varchar NULL,
+	country varchar NULL,
 	CONSTRAINT contact_pk PRIMARY KEY (id)
 );

@@ -12,8 +12,8 @@ const createContact = async (req, res) => {
     const { full_name, email, subject, mobilenumber, message } = req.body;
     
     const result = await pool.query(
-      'INSERT INTO contact (full_name, email, subject, mobilenumber, message) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [full_name, email, subject, mobilenumber || null, message || null]
+      'INSERT INTO contact (full_name, email, subject, mobilenumber, message, company_name, designation, country) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [full_name, email, subject, mobilenumber || null, message || null, company_name || null, designation || null, country || null]
     );
 
     res.status(201).json({message : "Contact us sent successfully"});
