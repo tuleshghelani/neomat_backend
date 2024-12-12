@@ -17,3 +17,16 @@ CREATE TABLE enquiry_master (
     address VARCHAR,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- DROP TABLE public.contact;
+CREATE TABLE public.contact (
+	id BIGSERIAL NOT NULL,
+	"name" varchar NOT NULL,
+	email varchar NOT NULL,
+	subject varchar NOT NULL,
+	mobilenumber varchar NULL,
+	message varchar NULL,
+	status varchar DEFAULT 'P'::character varying NULL,
+	created_at varchar DEFAULT now() NULL,
+	CONSTRAINT contact_pk PRIMARY KEY (id)
+);
