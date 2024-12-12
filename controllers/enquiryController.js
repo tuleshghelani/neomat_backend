@@ -11,11 +11,11 @@ const createEnquiry = async (req, res) => {
     const { name, company_name, email, mobilenumber, address } = req.body;
     
     const result = await pool.query(
-      'INSERT INTO enquiry_master (name, company_name, email, mobilenumber, address) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, company_name, email, mobilenumber, address]
+      'INSERT INTO enquiry_master (name, company_name, email, mobilenumber, address, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [name, company_name, email, mobilenumber, address, 'P']
     );
 
-    res.status(201).json(result.rows[0]);
+    res.status(201).json({message : "Enquiry sent successfully"});
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
@@ -103,10 +103,36 @@ const deleteEnquiry = async (req, res) => {
   }
 };
 
+const updateEnquiryStatus = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const { status } = req.body;
+
+    // Validate status
+    if (!['C', 'D', 'P'].includes(status)) {
+      return res.status(400).json({ message: 'Invalid status. Use C, D, or P' });
+    }
+
+    const result = await pool.query(
+      'UPDATE enquiry_master SET status = $1 WHERE id = $2 RETURNING *',
+      [status, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Enquiry not found' });
+    }
+
+    res.json({ message: 'Enquiry status updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
 module.exports = {
   createEnquiry,
   getAllEnquiries,
   getEnquiryById,
   updateEnquiry,
-  deleteEnquiry
+  deleteEnquiry,
+  updateEnquiryStatus
 };

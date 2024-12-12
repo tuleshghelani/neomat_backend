@@ -7,7 +7,8 @@ const {
   getAllEnquiries,
   getEnquiryById,
   updateEnquiry,
-  deleteEnquiry
+  deleteEnquiry,
+  updateEnquiryStatus
 } = require('../controllers/enquiryController');
 
 // Validation middleware
@@ -27,6 +28,7 @@ router.post('/', validateEnquiry, createEnquiry);
 
 // Protected routes
 router.use(authMiddleware);
+router.put('/updateStatus', updateEnquiryStatus);
 router.post('/getAllEnquiries/', getAllEnquiries);
 router.get('/:id', getEnquiryById);
 router.put('/:id', validateEnquiry, updateEnquiry);

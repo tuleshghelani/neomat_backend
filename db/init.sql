@@ -15,13 +15,14 @@ CREATE TABLE enquiry_master (
     email VARCHAR,
     mobilenumber VARCHAR,
     address VARCHAR,
+    status varchar(1) DEFAULT 'P'::character varying NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- DROP TABLE public.contact;
 CREATE TABLE public.contact (
 	id BIGSERIAL NOT NULL,
-	"name" varchar NOT NULL,
+	full_name varchar NOT NULL,
 	email varchar NOT NULL,
 	subject varchar NOT NULL,
 	mobilenumber varchar NULL,
