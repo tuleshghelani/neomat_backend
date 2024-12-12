@@ -9,10 +9,11 @@ const createContact = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { full_name, email, subject, mobilenumber, message } = req.body;
+    const { full_name, email, subject, mobilenumber, message, company_name, designation, country } = req.body;
     
     const result = await pool.query(
-      'INSERT INTO contact (full_name, email, subject, mobilenumber, message, company_name, designation, country) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      'INSERT INTO contact (full_name, email, subject, mobilenumber, message, company_name, designation, country) ' +
+      ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
       [full_name, email, subject, mobilenumber || null, message || null, company_name || null, designation || null, country || null]
     );
 

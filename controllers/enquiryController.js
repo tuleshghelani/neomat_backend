@@ -8,7 +8,7 @@ const createEnquiry = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, company_name, email, mobilenumber, address } = req.body;
+    const { name, company_name, email, mobilenumber, address, country, designation, productname } = req.body;
     
     const result = await pool.query(
       'INSERT INTO enquiry_master (name, company_name, email, mobilenumber, address, status, country, designation, productname) ' +
