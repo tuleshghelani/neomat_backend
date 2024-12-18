@@ -15,10 +15,11 @@ const validateOrigin = (req, res, next) => {
   if (!requestOrigin || allowedOrigins.some(allowed => 
     requestOrigin.startsWith(allowed) || allowed.startsWith(requestOrigin)
   )) {
-    // Set the CORS headers
+    // Set specific CORS headers for email routes
     res.header('Access-Control-Allow-Origin', requestOrigin);
+    res.header('Access-Control-Allow-Methods', 'POST');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
     next();
   } else {
     console.error(`Blocked request from unauthorized origin: ${requestOrigin}`);

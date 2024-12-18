@@ -12,9 +12,14 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/enquiries', enquiryRoutes);
+app.use('/api/contacts', contactRoutes);
+
+// Apply CORS only for email routes
 const corsOptions = {
   origin: function (origin, callback) {
-    // Check if origin is in allowed origins or if it's undefined (for same-origin requests)
     const allowedOrigins = process.env.ALLOWED_ORIGIN.split(',').map(o => o.trim());
     const isAllowed = !origin || allowedOrigins.some(allowed => {
       return origin.startsWith(allowed) || allowed.startsWith(origin);
@@ -26,20 +31,15 @@ const corsOptions = {
       callback(new Error('CORS not allowed'));
     }
   },
-  methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200
 };
 
-// Apply CORS before other middleware
-app.use(cors(corsOptions));
+app.use('/api/email', cors(corsOptions), emailRoutes);
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/enquiries', enquiryRoutes);
-app.use('/api/contacts', contactRoutes);
-app.use('/api/email', emailRoutes);
+// Test route
 app.get('/test', (req, res) => {
   res.send('This is a test route');
 });
