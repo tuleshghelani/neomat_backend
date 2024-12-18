@@ -2,6 +2,7 @@ const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
 const { sendEmail } = require('../controllers/emailController');
+const validateOrigin = require('../middleware/originValidator');
 
 // Validation middleware
 const validateEmailRequest = [
@@ -21,6 +22,6 @@ const validateEmailRequest = [
   body('message').optional().trim().escape()
 ];
 
-router.post('/send', validateEmailRequest, sendEmail);
+router.post('/send', validateOrigin, validateEmailRequest, sendEmail);
 
 module.exports = router; 

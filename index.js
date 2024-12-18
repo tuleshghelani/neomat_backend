@@ -13,11 +13,17 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+const corsOptions = {
+  origin: process.env.ALLOWED_ORIGIN,
+  methods: ['POST'],
+  optionsSuccessStatus: 200
+};
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/contacts', contactRoutes);
-app.use('/api/email', emailRoutes);
+app.use('/api/email', cors(corsOptions), emailRoutes);
 app.get('/test', (req, res) => {
   res.send('This is a test route');
 });

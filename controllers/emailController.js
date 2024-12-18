@@ -235,7 +235,7 @@ const sendEmail = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_RECIPIENT || process.env.EMAIL_USER,
-      subject: 'New Business Enquiry',
+      subject: 'Dealership : New Business Enquiry',
       html: htmlContent
     };
 
