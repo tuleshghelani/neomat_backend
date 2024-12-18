@@ -18,24 +18,24 @@ app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/contacts', contactRoutes);
 
 // Apply CORS only for email routes
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = process.env.ALLOWED_ORIGIN.split(',').map(o => o.trim());
-    const isAllowed = !origin || allowedOrigins.some(allowed => {
-      return origin.startsWith(allowed) || allowed.startsWith(origin);
-    });
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     const allowedOrigins = process.env.ALLOWED_ORIGIN.split(',').map(o => o.trim());
+//     const isAllowed = !origin || allowedOrigins.some(allowed => {
+//       return origin.startsWith(allowed) || allowed.startsWith(origin);
+//     });
     
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed'));
-    }
-  },
-  methods: ['POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200
-};
+//     if (isAllowed) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('CORS not allowed'));
+//     }
+//   },
+//   methods: ['POST'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// };
 
 app.use('/api/email', cors(corsOptions), emailRoutes);
 
