@@ -1,7 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
-const { sendEmail } = require('../controllers/emailController');
+const { sendEmail, sendContactEmail } = require('../controllers/emailController');
 const validateOrigin = require('../middleware/originValidator');
 
 // Validation middleware
@@ -22,6 +22,20 @@ const validateEmailRequest = [
   body('message').optional().trim().escape()
 ];
 
-router.post('/send', validateOrigin, validateEmailRequest, sendEmail);
+// New validation middleware for contact email
+const validateContactEmailRequest = [
+  body('name').notEmpty().trim().escape(),
+  body('email').isEmail().normalizeEmail(),
+  body('phone').notEmpty().trim(),
+  body('subject').notEmpty().trim().escape(),
+  body('message').notEmpty().trim().escape()
+];
+
+router.post('/send', (req, res, next) => {
+  console.log('Request received at /api/email/send');
+  console.log('Origin:', req.get('origin'));
+  next();
+}, validateOrigin, validateEmailRequest, sendEmail);
+router.post('/contact', validateOrigin, validateContactEmailRequest, sendContactEmail);
 
 module.exports = router; 
