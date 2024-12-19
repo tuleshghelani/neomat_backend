@@ -32,10 +32,10 @@ const validateContactEmailRequest = [
 ];
 
 router.post('/send', (req, res, next) => {
-  console.log('Request received at /api/email/send');
-  console.log('Origin:', req.get('origin'));
+  // console.log('Request received at /api/email/send');
+  // console.log('Origin:', req.get('origin'));
   next();
-}, validateOrigin, validateEmailRequest, sendEmail);
-router.post('/contact', validateOrigin, validateContactEmailRequest, sendContactEmail);
+}, validateEmailRequest, sendEmail);
+router.post('/contact', validateContactEmailRequest, sendContactEmail);
 
 module.exports = router; 
