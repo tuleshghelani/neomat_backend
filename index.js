@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
 const contactRoutes = require('./routes/contactRoutes');
@@ -37,7 +36,7 @@ app.use('/api/contacts', contactRoutes);
 //   optionsSuccessStatus: 200
 // };
 
-app.use('/api/email', cors(corsOptions), emailRoutes);
+app.use('/api/email', emailRoutes);
 
 // Test route
 app.get('/test', (req, res) => {
