@@ -32,8 +32,6 @@ const validateContactEmailRequest = [
 ];
 
 router.post('/send', (req, res, next) => {
-  // console.log('Request received at /api/email/send');
-  // console.log('Origin:', req.get('origin'));
   next();
 }, validateEmailRequest, sendEmail);
 router.post('/contact', validateContactEmailRequest, sendContactEmail);
