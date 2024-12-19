@@ -2,7 +2,6 @@ const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
 const { sendEmail, sendContactEmail } = require('../controllers/emailController');
-const validateOrigin = require('../middleware/originValidator');
 
 // Validation middleware
 const validateEmailRequest = [

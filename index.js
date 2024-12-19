@@ -40,7 +40,7 @@ app.use('/api/email', emailRoutes);
 
 // Test route
 app.get('/test', (req, res) => {
-  res.send('This is a test route');
+  res.send('This is a test route 123');
 });
 
 // Error handling middleware
