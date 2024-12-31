@@ -4,6 +4,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const emailRoutes = require('./routes/emailRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
