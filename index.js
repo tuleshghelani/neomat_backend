@@ -19,6 +19,7 @@ app.use('/api/contacts', contactRoutes);
 app.get('/test', (req, res) => {
   res.send('This is a test route');
 });
+app.use('/api/email', emailRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
