@@ -1,7 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
-const { sendEmail, sendContactEmail } = require('../controllers/emailController');
+const { sendEmail, sendContactEmail, sendShivholicEmail } = require('../controllers/emailController');
 
 // Validation middleware
 const validateEmailRequest = [
@@ -30,9 +30,17 @@ const validateContactEmailRequest = [
   body('message').notEmpty().trim().escape()
 ];
 
+// Validation middleware for Shivholic email
+const validateShivholicEmailRequest = [
+  body('name').notEmpty().trim().escape(),
+  body('email').isEmail().normalizeEmail(),
+  body('message').notEmpty().trim().escape()
+];
+
 router.post('/send', (req, res, next) => {
   next();
 }, validateEmailRequest, sendEmail);
 router.post('/contact', validateContactEmailRequest, sendContactEmail);
+router.post('/shivholic', validateShivholicEmailRequest, sendShivholicEmail);
 
-module.exports = router; 
+module.exports = router;
