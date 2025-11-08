@@ -33,8 +33,7 @@ const validateContactEmailRequest = [
 // Validation middleware for Shivholic email
 const validateShivholicEmailRequest = [
   body('name').notEmpty().trim().escape(),
-  body('email').isEmail().normalizeEmail(),
-  body('message').notEmpty().trim().escape()
+  body('email').isEmail().normalizeEmail()
 ];
 
 router.post('/send', (req, res, next) => {

@@ -9,8 +9,15 @@ const emailRoutes = require('./routes/emailRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CORS Configuration - Allow all origins
+const corsOptions = {
+  origin: true, // Allow all origins
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
